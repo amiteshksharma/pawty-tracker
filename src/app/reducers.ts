@@ -7,24 +7,24 @@ import {AppState} from './state';
  */
 
 const initAppState = {
-    username: '',
-    email: '',
-    groups: [],
-    auth: {
-        token: '',
-        lastLoggedIn: '',
-    },
-    test: '',
+  username: '',
+  email: '',
+  groups: [],
+  auth: {
+    token: '',
+    lastLoggedIn: '',
+  },
+  test: '',
 };
 
 export const appState = (state: AppState = initAppState, action: any) => {
   switch (action.type) {
     case 'LOGIN':
-        return {
-            ...state,
-            test: 'testing worked!',
-        };
+      return {
+        ...state,
+        test: 'testing worked!',
+      };
     default:
-        return state;
+      return state;
   }
 };

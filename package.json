@@ -10,12 +10,18 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-firebase/analytics": "^15.6.0",
+    "@react-native-firebase/app": "^15.6.0",
+    "@react-native-firebase/auth": "^15.6.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/node": "^18.7.19",
+    "add": "^2.0.6",
+    "firebase": "^9.10.0",
     "react": "18.1.0",
     "react-native": "0.70.1",
     "react-redux": "^8.0.4",
-    "react-router-native": "^6.4.1"
+    "react-router-native": "^6.4.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

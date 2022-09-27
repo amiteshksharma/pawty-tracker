@@ -1,5 +1,5 @@
-import { AppState } from './state';
+import {AppState} from './state';
 
 export const selectState = (state: AppState) => {
-    return state;
+  return state;
 };

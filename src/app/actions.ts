@@ -1,5 +1,5 @@
 export const test = () => {
-    return {
-        type: 'LOGIN',
-    };
+  return {
+    type: 'LOGIN',
+  };
 };

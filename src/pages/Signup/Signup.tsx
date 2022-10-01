@@ -16,6 +16,7 @@ import {COLORS} from '../../constants/palette';
 import {DOG_PAW} from '../../images';
 import {styles} from './styles';
 import {auth} from '../../firebase/config';
+import {SERVER_URL_DEV} from '../../constants/server';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -28,6 +29,20 @@ const Signup = () => {
   };
 
   const signUpAttempt = () => {
+    fetch(`${SERVER_URL_DEV}/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     if (!username || !email || !password) {
       console.log('invalid value!');
       return;
@@ -37,6 +52,18 @@ const Signup = () => {
       .createUserWithEmailAndPassword(email, password)
       .then(user => {
         console.log(user);
+        fetch('http://192.168.86.52:5000/user/create', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            uid: user.user.uid,
+            email: email,
+            username: username,
+          }),
+        });
         console.log('success!');
       })
       .catch(error => {

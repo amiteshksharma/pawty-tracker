@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -15,34 +15,33 @@ import Button from '../../components/Button/Button';
 import {COLORS} from '../../constants/palette';
 import {DOG_PAW} from '../../images';
 import {styles} from './styles';
-import {auth} from '../../firebase/config';
-import {SERVER_URL_DEV} from '../../constants/server';
+import {auth, FirebaseAuthTypes} from '../../firebase/config';
+import {addUserToDatabase} from '../../api/signup';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Handle user state changes
+  useEffect(() => {
+    auth().onAuthStateChanged(userState => {
+      setUser(userState);
+
+      if (initializing) {
+        setInitializing(false);
+      }
+    });
+  }, [initializing]);
 
   const onPressGoBack = () => {
     navigate('/');
   };
 
   const signUpAttempt = () => {
-    fetch(`${SERVER_URL_DEV}/`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
     if (!username || !email || !password) {
       console.log('invalid value!');
       return;
@@ -50,30 +49,15 @@ const Signup = () => {
 
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log(user);
-        fetch('http://192.168.86.52:5000/user/create', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            uid: user.user.uid,
-            email: email,
-            username: username,
-          }),
-        });
-        console.log('success!');
+      .then(u => {
+        // add user data to database
+        addUserToDatabase({email: email, username: username, uid: u.user.uid});
       })
       .catch(error => {
         console.log(error.code);
       });
 
     clearForm();
-
-    console.log('clicked');
-    console.log(username, email, password);
   };
 
   const clearForm = () => {

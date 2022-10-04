@@ -1,21 +1,83 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-native';
+import {fetchUserDetails} from '../../api/login';
+import {loginAction} from '../../app/actions';
 import Button from '../../components/Button/Button';
 import {COLORS} from '../../constants/palette';
+import {auth, FirebaseAuthTypes} from '../../firebase/config';
 import {DOG_PAW} from '../../images';
+import {UserDetails} from '../../types/user';
 import {styles} from './styles';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [initializing, setInitializing] = useState(true);
+  const [userInfo, setUserInfo] = useState<UserDetails | null>(null);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Handle user state changes
+  useEffect(() => {
+    auth().onAuthStateChanged(userState => {
+      setUser(userState);
+
+      if (initializing) {
+        setInitializing(false);
+      }
+    });
+  }, [initializing]);
 
   const onPressGoBack = () => {
     navigate('/');
   };
 
   const loginAttempt = () => {
-    console.log('clicked');
+    if (!email || !password) {
+      console.log('invalid value!');
+      return;
+    }
+
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(usr => {
+        // fetch the user's information
+        console.log(usr);
+        console.log('Logged in!');
+      })
+      .catch(error => {
+        console.log('The error code is: ' + error.code);
+      });
+
+    fetchUserDetails(email).then(data => {
+      setUserInfo(data);
+    });
+
+    clearForm();
   };
+
+  // clear the form states after submit
+  const clearForm = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  if (userInfo) {
+    const userDetails = {
+      email: userInfo.email,
+      username: userInfo.username,
+      uid: userInfo.uid,
+    };
+    const authInfo = {
+      token: user?.uid,
+      lastLoggedIn: user?.metadata.lastSignInTime,
+    };
+    dispatch(loginAction(userDetails, authInfo));
+    navigate('/home');
+  }
 
   return (
     <View style={styles.container}>
@@ -42,6 +104,8 @@ const Login = () => {
             placeholder={'Email'}
             placeholderTextColor={COLORS.placeholder}
             textContentType={'emailAddress'}
+            onChangeText={setEmail}
+            value={email}
           />
 
           <TextInput
@@ -50,6 +114,8 @@ const Login = () => {
             placeholderTextColor={COLORS.placeholder}
             textContentType={'password'}
             secureTextEntry={true}
+            onChangeText={setPassword}
+            value={password}
           />
 
           <Button text={'Login'} onPress={loginAttempt} />

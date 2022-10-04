@@ -17,9 +17,16 @@ import {DOG_PAW} from '../../images';
 import {styles} from './styles';
 import {auth, FirebaseAuthTypes} from '../../firebase/config';
 import {addUserToDatabase} from '../../api/signup';
+import {signupAction} from '../../app/actions';
+import {useDispatch} from 'react-redux';
 
+/**
+ * The signup page. Deals with user authentication and signing up
+ * the user for the app.
+ */
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [username, setUsername] = useState('');
@@ -35,7 +42,7 @@ const Signup = () => {
         setInitializing(false);
       }
     });
-  }, [initializing]);
+  });
 
   const onPressGoBack = () => {
     navigate('/');
@@ -51,15 +58,23 @@ const Signup = () => {
       .createUserWithEmailAndPassword(email, password)
       .then(u => {
         // add user data to database
-        addUserToDatabase({email: email, username: username, uid: u.user.uid});
+        const userInfo = {email: email, username: username, uid: u.user.uid};
+        const authInfo = {
+          token: user?.uid,
+          lastLoggedIn: user?.metadata.lastSignInTime,
+        };
+        addUserToDatabase(userInfo);
+        dispatch(signupAction(userInfo, authInfo));
       })
       .catch(error => {
-        console.log(error.code);
+        console.log('Error code is: ' + error.code);
       });
 
+    navigate('/home');
     clearForm();
   };
 
+  // clear the form states after submit
   const clearForm = () => {
     setEmail('');
     setPassword('');

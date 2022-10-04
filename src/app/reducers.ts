@@ -1,4 +1,5 @@
 import {AppState} from './state';
+import {AnyAction} from 'redux';
 /**
  * Get the current state
  *
@@ -7,23 +8,56 @@ import {AppState} from './state';
  */
 
 const initAppState = {
-  username: '',
-  email: '',
+  userInfo: {
+    username: '',
+    email: '',
+    uid: '',
+  },
   groups: [],
   auth: {
     token: '',
     lastLoggedIn: '',
   },
-  test: '',
 };
 
-export const appState = (state: AppState = initAppState, action: any) => {
+export const appState = (state: AppState = initAppState, action: AnyAction) => {
+  console.log(action);
+  console.log('INSIDE ACTION: ' + action.type);
   switch (action.type) {
-    case 'LOGIN':
+    case 'SIGNUP': {
+      const user = action.payload?.user;
+      const auth = action.payload?.auth;
+
       return {
         ...state,
-        test: 'testing worked!',
+        userInfo: {
+          uid: user?.uid,
+          username: user?.username,
+          email: user?.email,
+        },
+        auth: {
+          token: auth?.token,
+          lastLoggedIn: auth?.lastLoggedIn,
+        },
       };
+    }
+    case 'LOGIN': {
+      const user = action.payload?.user;
+      const auth = action.payload?.auth;
+
+      return {
+        ...state,
+        userInfo: {
+          uid: user?.uid,
+          username: user?.username,
+          email: user?.email,
+        },
+        auth: {
+          token: auth?.token,
+          lastLoggedIn: auth?.lastLoggedIn,
+        },
+      };
+    }
     default:
       return state;
   }

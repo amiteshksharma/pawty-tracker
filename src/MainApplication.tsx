@@ -1,24 +1,37 @@
 import React from 'react';
-import {View} from 'react-native';
-import {NativeRouter, Route, Routes} from 'react-router-native';
+import { View } from 'react-native';
 import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import {styles} from './styles';
+import { styles, headerTintColor, headerTitleAlign } from './styles';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 const MainApplication = () => {
   return (
-    <NativeRouter>
-      <View style={styles.container}>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </View>
-    </NativeRouter>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{
+        headerStyle: styles.headerStyle,
+        headerTintColor: headerTintColor,
+        headerTitleStyle: styles.headerTitleStyle,
+        headerTitleAlign: headerTitleAlign,
+        headerShadowVisible: false
+      }} >
+        <Stack.Screen name="Landing" component={Landing} options={{
+          title: 'PawtyTracker',
+        }} />
+        <Stack.Screen name="Login" component={Login} options={{
+          title: '',
+        }} />
+        <Stack.Screen name="Signup" component={Signup} options={{
+          title: '',
+        }} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

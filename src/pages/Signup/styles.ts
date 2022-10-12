@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {COLORS} from '../../constants/palette';
+import { StyleSheet } from 'react-native';
+import { COLORS } from '../../constants/palette';
 
 export const styles = StyleSheet.create({
   keyboardView: {
@@ -11,18 +11,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 30,
-  },
-  goBackContainer: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    marginLeft: 30,
-  },
-  goBackText: {
-    fontFamily: 'Lato-Italic',
-    fontSize: 18,
-    color: COLORS.offwhite,
+    paddingTop: 0,
   },
   imageContainer: {
     marginTop: 35,
@@ -57,7 +46,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    height: 250,
+    height: 275,
   },
   input: {
     width: 300,

@@ -9,8 +9,13 @@ export interface UserInfoType {
   email: string;
 }
 
-export interface AppState {
+export interface AppStateItems {
   userInfo: UserInfoType;
   groups: string[];
   auth: AuthType;
+  invalidLogin: number
+}
+
+export interface AppState {
+  appState: AppStateItems
 }

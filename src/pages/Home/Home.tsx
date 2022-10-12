@@ -1,18 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-native';
-import {selectState} from '../../app/selector';
+import Homepage from './Homepage';
+import Settings from '../Settings/Settings';
 
-const Home = () => {
-  const navigate = useNavigate();
-  const selectedState = useSelector(selectState);
-  console.log(selectedState);
+interface HomeProps {
+  navigation: any
+}
 
+const Home = (props: HomeProps) => {
+  const { navigation } = props;
   return (
-    <View>
-      <Text onPress={() => navigate('/')}> Hello world!</Text>
-    </View>
+    <Homepage />
   );
 };
 

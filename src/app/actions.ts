@@ -1,4 +1,4 @@
-import {UserInfoType, AuthType} from './state';
+import { UserInfoType, AuthType } from './state';
 
 export const signupAction = (user: UserInfoType, auth: AuthType) => {
   return {
@@ -19,3 +19,9 @@ export const loginAction = (user: UserInfoType, auth: AuthType) => {
     },
   };
 };
+
+export const LoginFailAction = () => {
+  return {
+    type: 'LOGIN_FAIL'
+  }
+}

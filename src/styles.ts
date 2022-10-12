@@ -1,10 +1,20 @@
-import {StyleSheet} from 'react-native';
-import {COLORS} from './constants/palette';
+import { StyleSheet } from 'react-native';
+import { COLORS } from './constants/palette';
 
 export const styles = StyleSheet.create({
-  container: {
+  headerStyle: {
     backgroundColor: COLORS.grey,
-    height: '100%',
-    width: '100%',
+    flex: 1,
+    display: 'flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  headerTitleStyle: {
+    fontFamily: 'Raleway-Medium',
+    textAlign: 'center',
+  }
 });
+
+export const headerTintColor = COLORS.white;
+export const headerTitleAlign = 'center';

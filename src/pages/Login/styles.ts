@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {COLORS} from '../../constants/palette';
+import { StyleSheet } from 'react-native';
+import { COLORS } from '../../constants/palette';
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,18 +8,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 30,
-  },
-  goBackContainer: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    marginLeft: 30,
-  },
-  goBackText: {
-    fontFamily: 'Lato-Italic',
-    fontSize: 18,
-    color: COLORS.offwhite,
+    paddingTop: 0,
   },
   imageContainer: {
     marginTop: 35,

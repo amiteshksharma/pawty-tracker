@@ -1,18 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-native';
-import {fetchUserDetails} from '../../api/login';
-import {loginAction} from '../../app/actions';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TextInput, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { fetchUserDetails } from '../../api/login';
+import { loginAction, LoginFailAction } from '../../app/actions';
 import Button from '../../components/Button/Button';
-import {COLORS} from '../../constants/palette';
-import {auth, FirebaseAuthTypes} from '../../firebase/config';
-import {DOG_PAW} from '../../images';
-import {UserDetails} from '../../types/user';
-import {styles} from './styles';
+import { COLORS } from '../../constants/palette';
+import { auth, FirebaseAuthTypes } from '../../firebase/config';
+import { DOG_PAW } from '../../images';
+import { UserDetails } from '../../types/user';
+import { styles } from './styles';
 
-const Login = () => {
-  const navigate = useNavigate();
+interface LoginProps {
+  navigation: any
+}
+
+const Login = (props: LoginProps) => {
+  const { navigation } = props;
   const dispatch = useDispatch();
   const [initializing, setInitializing] = useState(true);
   const [userInfo, setUserInfo] = useState<UserDetails | null>(null);
@@ -31,10 +34,6 @@ const Login = () => {
     });
   }, [initializing]);
 
-  const onPressGoBack = () => {
-    navigate('/');
-  };
-
   const loginAttempt = () => {
     if (!email || !password) {
       console.log('invalid value!');
@@ -49,6 +48,7 @@ const Login = () => {
         console.log('Logged in!');
       })
       .catch(error => {
+        dispatch(LoginFailAction());
         console.log('The error code is: ' + error.code);
       });
 
@@ -76,17 +76,11 @@ const Login = () => {
       lastLoggedIn: user?.metadata.lastSignInTime,
     };
     dispatch(loginAction(userDetails, authInfo));
-    navigate('/home');
+    navigation.navigate('Home');
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.goBackContainer}>
-        <TouchableOpacity onPress={onPressGoBack}>
-          <Text style={styles.goBackText}>Go Back</Text>
-        </TouchableOpacity>
-      </View>
-
       <View style={styles.imageContainer}>
         <Image source={DOG_PAW} style={styles.image} />
       </View>

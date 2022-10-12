@@ -3,22 +3,33 @@
  *
  */
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {styles} from './styles';
-import {LANDING_LOGO} from '../../images';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { styles } from './styles';
+import { LANDING_LOGO } from '../../images';
 import Button from '../../components/Button/Button';
-import {useNavigate} from 'react-router-native';
+import { useSelector } from 'react-redux';
+import { selectState } from '../../app/selector';
 
-const Landing = () => {
-  const navigate = useNavigate();
+interface LandingProps {
+  navigation: any
+}
+
+const Landing = (props: LandingProps) => {
+  const { navigation } = props;
+  const selectedState = useSelector(selectState);
+  console.log(selectedState);
 
   const onPressSignup = () => {
-    navigate('/signup');
+    navigation.navigate('Signup');
   };
 
   const onPressLogin = () => {
-    navigate('/login');
+    navigation.navigate('Login');
   };
+
+  if (selectedState.auth?.token) {
+    navigation.navigate('Home');
+  }
 
   return (
     <View style={styles.container}>

@@ -1,16 +1,21 @@
 import React from 'react';
 import Homepage from './Homepage';
-import Settings from '../Settings/Settings';
+import {auth} from '../../firebase/config';
 
 interface HomeProps {
-  navigation: any
+  navigation: any;
 }
 
 const Home = (props: HomeProps) => {
-  const { navigation } = props;
-  return (
-    <Homepage />
-  );
+  const {navigation} = props;
+
+  auth().onAuthStateChanged(user => {
+    if (!user) {
+      navigation.navigate('Landing');
+    }
+  });
+
+  return <Homepage navigation={navigation} />;
 };
 
 export default Home;

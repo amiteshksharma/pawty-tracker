@@ -3,19 +3,19 @@
  *
  */
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { styles } from './styles';
-import { LANDING_LOGO } from '../../images';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {styles} from './styles';
+import {LANDING_LOGO} from '../../images';
 import Button from '../../components/Button/Button';
-import { useSelector } from 'react-redux';
-import { selectState } from '../../app/selector';
+import {useSelector} from 'react-redux';
+import {selectState} from '../../app/selector';
 
 interface LandingProps {
-  navigation: any
+  navigation: any;
 }
 
 const Landing = (props: LandingProps) => {
-  const { navigation } = props;
+  const {navigation} = props;
   const selectedState = useSelector(selectState);
   console.log(selectedState);
 
@@ -24,11 +24,12 @@ const Landing = (props: LandingProps) => {
   };
 
   const onPressLogin = () => {
+    console.log('here');
     navigation.navigate('Login');
   };
 
   if (selectedState.auth?.token) {
-    navigation.navigate('Home');
+    navigation.navigate('MainAppPage');
   }
 
   return (

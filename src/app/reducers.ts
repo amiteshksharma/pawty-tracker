@@ -1,5 +1,5 @@
-import { AppState, AppStateItems } from './state';
-import { AnyAction } from 'redux';
+import {AppStateItems} from './state';
+import {AnyAction} from 'redux';
 /**
  * Get the current state
  *
@@ -18,15 +18,15 @@ const initAppState = {
     token: '',
     lastLoggedIn: '',
   },
-  invalidLogin: 0
+  invalidLogin: 0,
 };
 
-export const appState = (state: AppStateItems = initAppState, action: AnyAction) => {
+export const appState = (
+  state: AppStateItems = initAppState,
+  action: AnyAction,
+) => {
   console.log(action);
   console.log('INSIDE ACTION: ' + action.type);
-
-  console.log("the state below ===");
-  console.log(state);
   switch (action.type) {
     case 'SIGNUP': {
       const user = action.payload?.user;
@@ -61,14 +61,19 @@ export const appState = (state: AppStateItems = initAppState, action: AnyAction)
           token: auth?.token,
           lastLoggedIn: auth?.lastLoggedIn,
         },
-        invalidLogin: 0
+        invalidLogin: 0,
       };
     }
     case 'LOGIN_FAIL': {
       return {
         ...state,
-        invalidLogin: state.invalidLogin + 1
-      }
+        invalidLogin: state.invalidLogin + 1,
+      };
+    }
+    case 'LOGOUT': {
+      return {
+        initAppState,
+      };
     }
     default:
       return state;

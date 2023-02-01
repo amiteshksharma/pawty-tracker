@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Image, Text, TextInput, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { fetchUserDetails } from '../../api/login';
-import { loginAction, LoginFailAction } from '../../app/actions';
+import React, {useEffect, useState} from 'react';
+import {Image, Text, TextInput, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {fetchUserDetails} from '../../api/login';
+import {loginAction, LoginFailAction} from '../../app/actions';
 import Button from '../../components/Button/Button';
-import { COLORS } from '../../constants/palette';
-import { auth, FirebaseAuthTypes } from '../../firebase/config';
-import { DOG_PAW } from '../../images';
-import { UserDetails } from '../../types/user';
-import { styles } from './styles';
+import {COLORS} from '../../constants/palette';
+import {auth, FirebaseAuthTypes} from '../../firebase/config';
+import {DOG_PAW} from '../../images';
+import {UserDetails} from '../../types/user';
+import {styles} from './styles';
 
 interface LoginProps {
-  navigation: any
+  navigation: any;
 }
 
 const Login = (props: LoginProps) => {
-  const { navigation } = props;
+  const {navigation} = props;
   const dispatch = useDispatch();
   const [initializing, setInitializing] = useState(true);
   const [userInfo, setUserInfo] = useState<UserDetails | null>(null);
@@ -32,7 +32,7 @@ const Login = (props: LoginProps) => {
         setInitializing(false);
       }
     });
-  }, [initializing]);
+  }, [initializing, user]);
 
   const loginAttempt = () => {
     if (!email || !password) {
@@ -76,7 +76,8 @@ const Login = (props: LoginProps) => {
       lastLoggedIn: user?.metadata.lastSignInTime,
     };
     dispatch(loginAction(userDetails, authInfo));
-    navigation.navigate('Home');
+    // reset the stack navigation so we can't access landing page
+    navigation.navigate('MainAppPage');
   }
 
   return (

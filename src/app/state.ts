@@ -13,9 +13,9 @@ export interface AppStateItems {
   userInfo: UserInfoType;
   groups: string[];
   auth: AuthType;
-  invalidLogin: number
+  invalidLogin: number;
 }
 
 export interface AppState {
-  appState: AppStateItems
+  appState: AppStateItems;
 }

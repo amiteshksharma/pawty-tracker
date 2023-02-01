@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -6,21 +6,20 @@ import {
   Platform,
   Text,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import Button from '../../components/Button/Button';
-import { COLORS } from '../../constants/palette';
-import { DOG_PAW } from '../../images';
-import { styles } from './styles';
-import { auth, FirebaseAuthTypes } from '../../firebase/config';
-import { addUserToDatabase } from '../../api/signup';
-import { signupAction } from '../../app/actions';
-import { useDispatch } from 'react-redux';
+import {COLORS} from '../../constants/palette';
+import {DOG_PAW} from '../../images';
+import {styles} from './styles';
+import {auth, FirebaseAuthTypes} from '../../firebase/config';
+import {addUserToDatabase} from '../../api/signup';
+import {signupAction} from '../../app/actions';
+import {useDispatch} from 'react-redux';
 
 interface SignupProps {
-  navigation: any
+  navigation: any;
 }
 
 /**
@@ -28,7 +27,7 @@ interface SignupProps {
  * the user for the app.
  */
 const Signup = (props: SignupProps) => {
-  const { navigation } = props;
+  const {navigation} = props;
   const dispatch = useDispatch();
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
@@ -45,7 +44,7 @@ const Signup = (props: SignupProps) => {
         setInitializing(false);
       }
     });
-  });
+  }, [initializing, user]);
 
   const signUpAttempt = () => {
     if (!username || !email || !password) {
@@ -57,7 +56,7 @@ const Signup = (props: SignupProps) => {
       .createUserWithEmailAndPassword(email, password)
       .then(u => {
         // add user data to database
-        const userInfo = { email: email, username: username, uid: u.user.uid };
+        const userInfo = {email: email, username: username, uid: u.user.uid};
         const authInfo = {
           token: user?.uid,
           lastLoggedIn: user?.metadata.lastSignInTime,
@@ -80,15 +79,23 @@ const Signup = (props: SignupProps) => {
     setUsername('');
   };
 
+  if (user) {
+    // reset the stack navigation so we can't access landing page
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'MainAppPage'}],
+    // });
+    navigation.navigate('MainAppPage');
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardView}
-      behavior={Platform.select({ ios: 'padding', android: 'height' })}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 100 })}
+      behavior={Platform.select({ios: 'padding', android: 'height'})}
+      keyboardVerticalOffset={Platform.select({ios: 0, android: 100})}
       enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-
           <View style={styles.imageContainer}>
             <Image source={DOG_PAW} style={styles.image} />
           </View>

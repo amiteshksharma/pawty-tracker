@@ -5,6 +5,7 @@ import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Settings from './pages/Settings/Settings';
+import GroupCreation from './pages/GroupCreation/GroupCreation';
 import logout from './util/logout';
 import {
   styles,
@@ -28,7 +29,7 @@ const Drawer = createDrawerNavigator();
 
 const MainApp = () => {
   const name =
-    'Hello, ' + (store.getState().appState?.userInfo.username ?? 'user');
+    'Hello, ' + (store.getState().appState ? store.getState().appState?.userInfo.username : 'user');
 
   return (
     <Drawer.Navigator
@@ -62,6 +63,7 @@ const MainApp = () => {
         drawerActiveTintColor: drawerActiveTintColor,
       }}>
       <Drawer.Screen name="My Groups" component={Home} />
+      <Drawer.Screen name="Create Group" component={GroupCreation} />
       <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );

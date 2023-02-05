@@ -1,11 +1,5 @@
 import {AppStateItems} from './state';
 import {AnyAction} from 'redux';
-/**
- * Get the current state
- *
- * @param state - current state object
- * @returns - the current state
- */
 
 const initAppState = {
   userInfo: {
@@ -21,6 +15,13 @@ const initAppState = {
   invalidLogin: 0,
 };
 
+/**
+ * Get the current state and update based on 
+ * dispatched action
+ *
+ * @param state - current state object
+ * @returns - the current state
+ */
 export const appState = (
   state: AppStateItems = initAppState,
   action: AnyAction,
@@ -72,7 +73,17 @@ export const appState = (
     }
     case 'LOGOUT': {
       return {
-        initAppState,
+        userInfo: {
+          username: '',
+          email: '',
+          uid: '',
+        },
+        groups: [],
+        auth: {
+          token: '',
+          lastLoggedIn: '',
+        },
+        invalidLogin: 0,
       };
     }
     default:

@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {RefreshControl, ScrollView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectState} from '../../app/selector';
 import GroupList from '../../components/Groups/GroupList/GroupList';
 import {styles} from './styles';
-import { groupNames } from './Data';
-import { getUserGroups } from '../../api/groups';
-import { GroupItemProps } from '../../components/Groups/types';
+import {groupNames} from './Data';
+import {getUserGroups} from '../../api/groups';
+import {GroupItemProps} from '../../components/Groups/types';
 
 interface HomepageProps {
   navigation: any;
@@ -21,7 +21,7 @@ const Homepage = (props: HomepageProps) => {
 
   useEffect(() => {
     setLoading(true);
-    getUserGroupFunction();  
+    getUserGroupFunction();
   }, []);
 
   const onRefresh = useCallback(() => {
@@ -31,7 +31,7 @@ const Homepage = (props: HomepageProps) => {
     }, 2000);
 
     getUserGroupFunction();
-  }, [])
+  }, []);
 
   const getUserGroupFunction = () => {
     getUserGroups(selectedState.userInfo.uid).then(data => {
@@ -39,21 +39,23 @@ const Homepage = (props: HomepageProps) => {
       setUserGroups(data.groups);
       setLoading(false);
     });
-  }
+  };
 
   if (loading) {
     return (
       <View>
         <Text>Loading...</Text>
       </View>
-    )
+    );
   }
 
   // console.log(userGroups);
   return (
-    <ScrollView style={styles.container} refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-    }>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       <GroupList groups={userGroups} navigation={navigation} />
     </ScrollView>
   );

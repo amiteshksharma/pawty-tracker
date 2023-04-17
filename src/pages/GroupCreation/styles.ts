@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { COLORS } from '../../constants/palette';
+import {COLORS} from '../../constants/palette';
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,13 +18,13 @@ export const styles = StyleSheet.create({
   },
   groupNameContainer: {
     display: 'flex',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   input: {
     borderColor: COLORS.offwhite,
     borderBottomWidth: 1,
     color: COLORS.offwhite,
-    width: 350
+    width: 350,
   },
   charCount: {
     color: COLORS.offwhite,
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.black,
     borderWidth: 1,
     borderRadius: 10,
-  }, 
+  },
   dropdownButton: {
     width: 350,
     borderColor: COLORS.offwhite,
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   },
   dropdownButtonText: {
     color: COLORS.offwhite,
-    fontFamily: 'Lato-Regular'  
+    fontFamily: 'Lato-Regular',
   },
   chevron: {
     color: COLORS.offwhite,
@@ -55,6 +55,6 @@ export const styles = StyleSheet.create({
     height: 300,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
 });

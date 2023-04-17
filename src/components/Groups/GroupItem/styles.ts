@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   icon: {
     width: 50,
-    height: 50
+    height: 50,
   },
   titleContainer: {
     display: 'flex',
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     paddingRight: 5,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   bottomTextCreatedBy: {
     width: '70%',
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 11,
     color: COLORS.black,
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
 });
 

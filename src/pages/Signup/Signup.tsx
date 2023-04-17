@@ -80,7 +80,7 @@ const Signup = (props: SignupProps) => {
   };
 
   if (user) {
-    console.log("user: ", user);
+    console.log('user: ', user);
     // reset the stack navigation so we can't access landing page
     // navigation.reset({
     //   index: 0,

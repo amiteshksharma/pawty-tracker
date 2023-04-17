@@ -1,9 +1,9 @@
 import {SERVER_URL_DEV} from '../constants/server';
 
 interface CreateGroupDetails {
-    name: string,
-    user: string,
-    pet_type: string,
+  name: string;
+  user: string;
+  pet_type: string;
 }
 
 export const createGroup = (createGroup: CreateGroupDetails) => {
@@ -39,5 +39,5 @@ export const getUserGroups = (user: string) => {
     .then(response => response.json())
     .catch(err => {
       console.log(err);
-    });  
-}
+    });
+};

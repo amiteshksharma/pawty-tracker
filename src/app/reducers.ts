@@ -16,7 +16,7 @@ const initAppState = {
 };
 
 /**
- * Get the current state and update based on 
+ * Get the current state and update based on
  * dispatched action
  *
  * @param state - current state object

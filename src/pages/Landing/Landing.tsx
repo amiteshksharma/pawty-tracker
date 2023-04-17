@@ -28,7 +28,7 @@ const Landing = (props: LandingProps) => {
     navigation.navigate('Login');
   };
 
-  if (selectedState.auth?.token !== "") {
+  if (selectedState.auth?.token !== '') {
     navigation.navigate('MainAppPage');
   }
 

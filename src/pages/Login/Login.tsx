@@ -44,7 +44,6 @@ const Login = (props: LoginProps) => {
       .signInWithEmailAndPassword(email, password)
       .then(usr => {
         // fetch the user's information
-        console.log(usr);
         console.log('Logged in!');
       })
       .catch(error => {
@@ -65,20 +64,22 @@ const Login = (props: LoginProps) => {
     setPassword('');
   };
 
-  if (userInfo) {
-    const userDetails = {
-      email: userInfo.email,
-      username: userInfo.username,
-      uid: userInfo.uid,
-    };
-    const authInfo = {
-      token: user?.uid,
-      lastLoggedIn: user?.metadata.lastSignInTime,
-    };
-    dispatch(loginAction(userDetails, authInfo));
-    // reset the stack navigation so we can't access landing page
-    navigation.navigate('MainAppPage');
-  }
+  useEffect(() => {
+    if (userInfo && user) {
+      const userDetails = {
+        email: userInfo.email,
+        username: userInfo.username,
+        uid: userInfo.uid,
+      };
+      const authInfo = {
+        token: user?.uid,
+        lastLoggedIn: user?.metadata.lastSignInTime,
+      };
+      dispatch(loginAction(userDetails, authInfo));
+      // reset the stack navigation so we can't access landing page
+      navigation.navigate('MainAppPage');
+    }
+  }, [userInfo, user]);
 
   return (
     <View style={styles.container}>

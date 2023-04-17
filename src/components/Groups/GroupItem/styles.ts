@@ -12,6 +12,16 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 1,
   },
+  iconContainer: {
+    padding: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  icon: {
+    width: 50,
+    height: 50
+  },
   titleContainer: {
     display: 'flex',
     justifyContent: 'space-evenly',
@@ -23,22 +33,30 @@ export const styles = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     fontSize: 20,
     color: COLORS.black,
+    paddingTop: 7,
   },
-  petType: {
-    fontFamily: 'Lato',
-    fontSize: 12,
-    color: COLORS.darkgrey
-  },
-  iconContainer: {
-    width: 75,
+  bottomTextContainer: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingRight: 5,
+    paddingBottom: 5
   },
-  icon: {
-    width: 50,
-    height: 50
-  }
+  bottomTextCreatedBy: {
+    width: '70%',
+    paddingRight: 8,
+    fontFamily: 'Lato-Regular',
+    fontSize: 11,
+    color: COLORS.black,
+  },
+  bottomText: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 11,
+    color: COLORS.black,
+    textTransform: 'capitalize'
+  },
 });
 
 export const dropShadowStyles = {

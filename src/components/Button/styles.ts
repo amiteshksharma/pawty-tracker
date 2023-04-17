@@ -14,6 +14,6 @@ export const styles = StyleSheet.create({
   text: {
     color: COLORS.offwhite,
     fontFamily: 'Lato-Bold',
-    fontSize: 24,
+    fontSize: 20,
   },
 });

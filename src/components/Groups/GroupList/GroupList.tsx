@@ -5,13 +5,18 @@ import { GroupItemProps } from '../types';
 import {styles} from './styles';
 
 interface GroupListProps {
+  navigation: any;
   groups: GroupItemProps[];
 }
 
 const GroupList = (props: GroupListProps) => {
-  const {groups} = props;
+  const {groups, navigation} = props;
 
-  const renderGroups = () => groups.map(group => <GroupItem {...group} />);
+  const renderGroups = () => {
+    if (groups === undefined || groups.length === 0) return;
+
+    return groups.map(group => <GroupItem {...group} navigation={navigation} />)
+  };
 
   return (
     <ScrollView>

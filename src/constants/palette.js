@@ -9,7 +9,7 @@ export const COLORS = {
   blue: '#4390CD',
   lightBlue: '#A5C9CA',
   lighterBlue: '#E7F6F2',
-  dropshadow: '#46FCFC',
+  dropshadow: '#44DBDB',
 
   // shades of white
   offwhite: '#FAF9F6',

@@ -23,13 +23,14 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {store} from './app/store';
+import GroupDetails from './pages/GroupDetails/GroupDetails';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const MainApp = () => {
   const name =
-    'Hello, ' + (store.getState().appState ? store.getState().appState?.userInfo.username : 'user');
+    `Hello, ${store.getState().appState ? store.getState().appState?.userInfo.username : 'user'}!`;
 
   return (
     <Drawer.Navigator
@@ -65,6 +66,13 @@ const MainApp = () => {
       <Drawer.Screen name="My Groups" component={Home} />
       <Drawer.Screen name="Create Group" component={GroupCreation} />
       <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen 
+          name="Group Details"
+          component={GroupDetails}
+          options={{
+            drawerItemStyle: { display: 'none' }
+          }}
+        />
     </Drawer.Navigator>
   );
 };

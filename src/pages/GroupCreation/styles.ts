@@ -57,4 +57,5 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
   },
+  rowStyles: {width: 350},
 });

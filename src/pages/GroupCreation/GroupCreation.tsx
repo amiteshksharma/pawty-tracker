@@ -14,7 +14,8 @@ const petTypes = ['Dog', 'Cat', 'Fish', 'Bird', 'Turtle'];
 // - name: primary key, non-nullable name of group
 // - pet_type: non-nullable, Enum, type of pet
 
-const GroupCreation = () => {
+const GroupCreation = (props: any) => {
+  const {navigation} = props;
   const [groupName, setGroupName] = useState('');
   const [petType, setPetType] = useState('');
   const selectedState = useSelector(selectState);
@@ -25,13 +26,14 @@ const GroupCreation = () => {
       return;
     }
 
-    const data = {
+    const groupData = {
       user: selectedState.userInfo.uid,
       pet_type: petType.toLowerCase(),
       name: groupName,
     };
 
-    createGroup(data).then(data => {
+    createGroup(groupData).then(data => {
+      navigation.navigate('My Groups');
       console.log(data);
     });
   };
@@ -52,13 +54,13 @@ const GroupCreation = () => {
         </View>
         <SelectDropdown
           data={petTypes}
-          onSelect={(selectedItem, index) => {
+          onSelect={selectedItem => {
             setPetType(selectedItem);
           }}
-          buttonTextAfterSelection={(selectedItem, index) => {
+          buttonTextAfterSelection={selectedItem => {
             return selectedItem;
           }}
-          rowTextForSelection={(item, index) => {
+          rowTextForSelection={item => {
             return item;
           }}
           renderDropdownIcon={isOpened => {
@@ -71,7 +73,7 @@ const GroupCreation = () => {
             );
           }}
           defaultButtonText={'Select a Pet Type'}
-          rowStyle={{width: 350}}
+          rowStyle={styles.rowStyles}
           dropdownStyle={styles.dropdown}
           buttonStyle={styles.dropdownButton}
           buttonTextStyle={styles.dropdownButtonText}

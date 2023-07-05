@@ -10,9 +10,13 @@ const GroupItem = (props: GroupItemProps) => {
   const {name, petType, createdBy, id, navigation} = props;
 
   const onPress = () => {
-    console.log('clicked the ' + name, id);
-    console.log(navigation.getState());
-    navigation.navigate('Group Details');
+    navigation.navigate('Group Details', {
+      name: name,
+      id: id,
+      petType: petType,
+      createdBy: createdBy,
+      navigation: navigation,
+    });
   };
 
   return (

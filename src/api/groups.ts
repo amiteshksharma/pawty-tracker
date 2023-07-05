@@ -6,7 +6,7 @@ interface CreateGroupDetails {
   pet_type: string;
 }
 
-export const createGroup = (createGroup: CreateGroupDetails) => {
+export const createGroup = (createGroupItems: CreateGroupDetails) => {
   return fetch(`${SERVER_URL_DEV}/group/create`, {
     method: 'POST',
     headers: {
@@ -14,9 +14,9 @@ export const createGroup = (createGroup: CreateGroupDetails) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      name: createGroup.name,
-      user: createGroup.user,
-      pet_type: createGroup.pet_type,
+      name: createGroupItems.name,
+      user: createGroupItems.user,
+      pet_type: createGroupItems.pet_type,
     }),
   })
     .then(response => response.json())

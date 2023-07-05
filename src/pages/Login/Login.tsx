@@ -44,7 +44,7 @@ const Login = (props: LoginProps) => {
       .signInWithEmailAndPassword(email, password)
       .then(usr => {
         // fetch the user's information
-        console.log('Logged in!');
+        console.log('Logged in!', usr);
       })
       .catch(error => {
         dispatch(LoginFailAction());
@@ -79,7 +79,7 @@ const Login = (props: LoginProps) => {
       // reset the stack navigation so we can't access landing page
       navigation.navigate('MainAppPage');
     }
-  }, [userInfo, user]);
+  }, [userInfo, user, dispatch, navigation]);
 
   return (
     <View style={styles.container}>

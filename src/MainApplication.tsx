@@ -24,6 +24,7 @@ import {
 } from '@react-navigation/drawer';
 import {store} from './app/store';
 import GroupDetails from './pages/GroupDetails/GroupDetails';
+import Events from './pages/Events/Events';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -72,6 +73,13 @@ const MainApp = () => {
       <Drawer.Screen
         name="Group Details"
         component={GroupDetails}
+        options={{
+          drawerItemStyle: {display: 'none'},
+        }}
+      />
+      <Drawer.Screen
+        name="New Event"
+        component={Events}
         options={{
           drawerItemStyle: {display: 'none'},
         }}

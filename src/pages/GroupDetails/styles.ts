@@ -54,18 +54,22 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   eventTitle: {
-    fontSize: 20,
+    fontSize: 24,
     color: COLORS.black,
+    paddingLeft: 5,
   },
   eventDescription: {
     color: COLORS.black,
-    fontSize: 14,
+    fontSize: 16,
     paddingTop: 5,
+    paddingLeft: 10,
   },
   eventTimeContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    paddingBottom: 2,
+    paddingRight: 2,
   },
   eventTime: {
     color: COLORS.black,
@@ -77,11 +81,11 @@ export const styles = StyleSheet.create({
   addDetailEventText: {
     color: COLORS.white,
     display: 'flex',
-    fontSize: 14,
+    fontSize: 18,
   },
   addDetailEventButton: {
     backgroundColor: COLORS.darkgrey,
-    height: 40,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },

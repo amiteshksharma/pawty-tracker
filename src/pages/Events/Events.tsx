@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {styles} from './styles';
-import {Button, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectUserInfo} from '../../app/selector';
 import {TextInput} from 'react-native-gesture-handler';
@@ -8,7 +8,7 @@ import {createEvent} from '../../api/events';
 
 const Events = (props: any) => {
   const {navigation} = props;
-  const {id} = props.route.params;
+  const {id, createdBy, name, petType} = props.route.params;
   const userInfo = useSelector(selectUserInfo);
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -22,7 +22,13 @@ const Events = (props: any) => {
     };
 
     createEvent(createEventProps).then(data => {
-      navigation.goBack();
+      navigation.navigate('Group Details', {
+        name: name,
+        id: id,
+        petType: petType,
+        createdBy: createdBy,
+        navigation: navigation,
+      });
       console.log(data);
     });
 
@@ -40,6 +46,9 @@ const Events = (props: any) => {
         value={title}
         style={styles.textbox}
       />
+      <View style={styles.charCountContainer}>
+        <Text style={styles.charCount}>{title.length}/32</Text>
+      </View>
 
       <TextInput
         editable
@@ -51,6 +60,9 @@ const Events = (props: any) => {
         value={description}
         style={styles.textbox}
       />
+      <View style={styles.charCountContainer}>
+        <Text style={styles.charCount}>{description.length}/128</Text>
+      </View>
 
       <View style={styles.createButton}>
         <Button title="Create" onPress={onCreateEvent} />

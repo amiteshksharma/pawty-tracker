@@ -15,11 +15,22 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.offwhite,
     width: 350,
     marginBottom: 30,
-    marginTop: 30,
+    marginTop: 60,
     borderRadius: 10,
   },
   createButton: {
     width: 350,
-    marginTop: 50,
+    marginTop: 250,
+  },
+  charCountContainer: {
+    width: 340,
+    alignItems: 'flex-end',
+    marginTop: -30,
+  },
+  charCount: {
+    color: COLORS.offwhite,
+    fontFamily: 'Lato',
+    fontSize: 13,
+    paddingTop: 5,
   },
 });

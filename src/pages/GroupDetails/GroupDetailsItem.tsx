@@ -1,6 +1,9 @@
 import React from 'react';
-import {styles} from './styles';
+import {dropShadowStyles, styles} from './styles';
 import {Text, View} from 'react-native';
+import moment from 'moment';
+import DropShadow from 'react-native-drop-shadow';
+import {convertToMilliseconds} from '../../util/functions';
 
 interface GroupDetailsEvent {
   title: string;
@@ -9,16 +12,20 @@ interface GroupDetailsEvent {
 }
 
 const groupDetailsEvent = (item: GroupDetailsEvent) => {
-  //   const date = new Date(item.created);
+  const unixToInt = Number(item.created);
+  const millisecondsTime = convertToMilliseconds(unixToInt);
+  const formattedDate = moment(millisecondsTime).format('hh:mma');
 
   return (
-    <View style={styles.eventContainer}>
-      <Text style={styles.eventTitle}>{item.title}</Text>
-      <Text style={styles.eventDescription}>{item.description}</Text>
-      <View style={styles.eventTimeContainer}>
-        <Text style={styles.eventTime}>Occurred at {item.created}</Text>
+    <DropShadow style={dropShadowStyles}>
+      <View style={styles.eventContainer}>
+        <Text style={styles.eventTitle}>{item.title}</Text>
+        <Text style={styles.eventDescription}>{item.description}</Text>
+        <View style={styles.eventTimeContainer}>
+          <Text style={styles.eventTime}>Occurred at: {formattedDate}</Text>
+        </View>
       </View>
-    </View>
+    </DropShadow>
   );
 };
 

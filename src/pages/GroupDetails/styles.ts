@@ -89,4 +89,26 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  addUserContainer: {
+    width: '100%',
+  },
+  addUserButton: {
+    marginTop: 5,
+    paddingLeft: 10,
+    textAlign: 'left',
+  },
+  addUserButtonText: {
+    fontSize: 16,
+    color: COLORS.offwhite,
+  },
 });
+
+export const dropShadowStyles = {
+  shadowColor: COLORS.dropshadow,
+  shadowOffset: {
+    width: 2,
+    height: 2,
+  },
+  shadowOpacity: 1,
+  shadowRadius: 2,
+};
